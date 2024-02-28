@@ -30,7 +30,7 @@ public class HeadOffice {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "headOffice")
-	private List<Branch> branches= new ArrayList<Branch>();
+	private List<Branch> branches=new ArrayList<Branch>();
 
 	public int getOfficeId() {
 		return officeId;
