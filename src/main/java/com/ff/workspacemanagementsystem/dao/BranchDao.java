@@ -17,8 +17,8 @@ import com.ff.workspacemanagementsystem.repository.HeadOfficeRepository;
 public class BranchDao {
 	@Autowired
 	BranchRepository branchRepository;
-	@Autowired
-	HeadOffice headOffice;
+//	@Autowired
+//	HeadOffice headOffices;
 	@Autowired
 	HeadOfficeRepository headOfficeRepository;
 	

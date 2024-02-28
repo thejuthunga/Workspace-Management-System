@@ -27,16 +27,16 @@ public class BranchController {
 		return service.saveBranch(id, branch);
 	}
 	
-	@GetMapping("branch/{id}")
+	@GetMapping("/branch/{id}")
 	public ResponseEntity<ResponseStructure<Branch>> findbranch(@PathVariable int id){
 		return service.findbranch(id);
 	}
 	
-	@GetMapping("/branch/{id}")
+	@GetMapping("/allbranch/{id}")
 	public ResponseEntity<ResponseStructure<List<Branch>>> findAllBranch(@PathVariable int id){
 		return service.findAllBranch(id);
 	}
-	@PutMapping("")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@PathVariable int id,@RequestBody Branch branch){
 		return service.Updatebranch(id, branch);
 	}
