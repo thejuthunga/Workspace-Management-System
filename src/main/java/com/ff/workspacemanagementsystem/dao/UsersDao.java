@@ -90,6 +90,7 @@ public class UsersDao {
 			}
 			f.setIsfloorAvailable(false);
 			floorsRepository.save(f);
+			f.setIsfloorAvailable(f.isIsfloorAvailable());
 			if(branch_floors.size() <= branch.getFloorsCount()) {
 				branch_floors.add(f);
 				usersRepository.save(f.getUsers());
