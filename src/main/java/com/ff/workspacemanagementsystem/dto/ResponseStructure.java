@@ -1,5 +1,8 @@
 package com.ff.workspacemanagementsystem.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ResponseStructure <T> {
 	private int statusCode;
 	private String message;

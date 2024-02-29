@@ -1,5 +1,6 @@
 package com.ff.workspacemanagementsystem.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,7 +30,7 @@ public class HeadOffice {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "headOffice")
-	private List<Branch> branches;
+	private List<Branch> branches=new ArrayList<Branch>();
 
 	public int getOfficeId() {
 		return officeId;
