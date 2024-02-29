@@ -25,19 +25,24 @@ public class BranchDao {
 	public Branch saveBranch(int id,Branch branch) {
 		Optional<HeadOffice> optional = headOfficeRepository.findById(id);
 		if(optional.isPresent()) {
+			HeadOffice headOffice = optional.get();
 			List<Branch> branches = optional.get().getBranches();
 			branches.add(branch);
+			branch.setHeadOffice(headOffice);
 		}
 		return branchRepository.save(branch);
 	}
 	
 	public Branch updateBranch(int id,Branch branch) {
-		Optional<HeadOffice> optional = headOfficeRepository.findById(id);
+		Optional<Branch> optional = branchRepository.findById(id);
 		if(optional.isPresent()) {
-			List<Branch> branches = optional.get().getBranches();
-			branches.add(branch);
+			 Branch branchOptional = optional.get();
+			 branch.setBranchId(branchOptional.getBranchId());
+			 
+			return branchRepository.save(branch);
 		}
-		return branchRepository.save(branch);
+		throw new BranchNotFoundException();
+		
 	}
 		
 	public Branch findBranch(int id) {

@@ -41,6 +41,14 @@ public class Branch {
 	@JoinColumn
 	private HeadOffice headOffice;
 	
+	public HeadOffice getHeadOffice() {
+		return headOffice;
+	}
+
+	public void setHeadOffice(HeadOffice headOffice) {
+		this.headOffice = headOffice;
+	}
+
 	public int getBranchId() {
 		return branchId;
 	}
