@@ -5,11 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ff.workspacemanagementsystem.dao.BranchDao;
 import com.ff.workspacemanagementsystem.dao.FloorDao;
 import com.ff.workspacemanagementsystem.dto.ResponseStructure;
+import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.entity.Floors;
-
-import ch.qos.logback.core.net.ssl.SSLNestedComponentRegistryRules;
 
 @Service
 public class FloorsService {
@@ -17,10 +17,16 @@ public class FloorsService {
 	@Autowired
 	private FloorDao floorDao;
 	
+	@Autowired
+	private BranchDao branchDao;
+	
 	public ResponseEntity<ResponseStructure<String>> saveFloor(int branchid,Floors floors){
 		
 		//need branchDao.getById(branchid)
-		
+		Branch branch = branchDao.findBranch(branchid);
+		if(branch != null) {
+			floors.setBranch(branch);
+		}
 	    floorDao.saveFloor(floors);
 		
 		ResponseStructure<String> structure=new ResponseStructure<String>();
@@ -35,6 +41,7 @@ public class FloorsService {
 		
 		/*
 		 * need branchid and find floorid in the List<Floor>
+		 * 
 		 * */
 		Floors floors = floorDao.getFloorById(floorid);
 		
