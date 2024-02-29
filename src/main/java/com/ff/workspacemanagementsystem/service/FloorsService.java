@@ -13,6 +13,7 @@ import com.ff.workspacemanagementsystem.dto.ResponseStructure;
 import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.exception.BranchNotFoundException;
+import com.ff.workspacemanagementsystem.exception.FloorsExceededException;
 
 @Service
 public class FloorsService {
@@ -26,22 +27,22 @@ public class FloorsService {
 	public ResponseEntity<ResponseStructure<String>> saveFloor(int branchid, Floors floors) {
 
 		Branch branch = branchDao.findBranch(branchid);
-		if (branch.getFloors().size() <= branch.getfloorsCount()) {
+		if (branch.getFloors().size() < branch.getfloorsCount()) {
 			if (branch != null) {
 				floors.setBranch(branch);
 				branch.getFloors().add(floors);
+				floorDao.saveFloor(floors);
+				
+				ResponseStructure<String> structure = new ResponseStructure<String>();
+				structure.setMessage("Floor Data inserted");
+				structure.setStatusCode(HttpStatus.CREATED.value());
+				structure.setData("Floor Data Stroed in the DB");
+
+				return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.CREATED);
 			}
 
 		}
-
-		floorDao.saveFloor(floors);
-		
-		ResponseStructure<String> structure = new ResponseStructure<String>();
-		structure.setMessage("Floor Data inserted");
-		structure.setStatusCode(HttpStatus.CREATED.value());
-		structure.setData("Floor Data Stroed in the DB");
-
-		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.CREATED);
+		throw new FloorsExceededException();
 	}
 
 	public ResponseEntity<ResponseStructure<Floors>> getFloorDetails(int floorid, int branchid) {
@@ -77,9 +78,13 @@ public class FloorsService {
 //
 //		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
 //	}
+
 	
-//	public ResponseEntity<ResponseStructure<List<Floors>>> getAllFloors(int userid,)
-	
+//	  public ResponseEntity<ResponseStructure<List<Floors>>> getAllFloors(int userid,int branchid){ 
+//		  
+//	  }
+	 
+
 	public ResponseEntity<ResponseStructure<Floors>> updateFloor(int userid, int branchid, int floorid, Floors floors) {
 		// need
 

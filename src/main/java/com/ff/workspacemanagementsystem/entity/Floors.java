@@ -17,6 +17,7 @@ public class Floors {
 	private int floorid;
 	private int noOfCabins;
 	private int noOfWorkstations;
+	
 	private boolean isCafeAvailable;
 	
 	private boolean isfloorAvailable;

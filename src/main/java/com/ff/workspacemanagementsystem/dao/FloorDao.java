@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ff.workspacemanagementsystem.entity.Floors;
-import com.ff.workspacemanagementsystem.repository.FloorRepository;
+import com.ff.workspacemanagementsystem.repository.FloorsRepository;
 
 @Repository
 public class FloorDao {
 	@Autowired
-	private FloorRepository floorRepository;
+	private FloorsRepository floorRepository;
 	
 	
 	

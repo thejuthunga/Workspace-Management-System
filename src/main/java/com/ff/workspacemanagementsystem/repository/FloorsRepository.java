@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ff.workspacemanagementsystem.entity.Floors;
 
-public interface FloorRepository extends JpaRepository<Floors, Integer> {
+public interface FloorsRepository extends JpaRepository<Floors, Integer> {
 
 }

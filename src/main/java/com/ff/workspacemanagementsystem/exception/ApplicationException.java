@@ -34,8 +34,16 @@ public class ApplicationException extends ResponseEntityExceptionHandler{
 		response.setData(exception.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(response, HttpStatus.NOT_FOUND);
 	}
-
-
+	
+	//floor exceed
+	@ExceptionHandler(FloorsExceededException.class)
+	public ResponseEntity<ResponseStructure<String>> catchFloorException(FloorsExceededException exception){
+		ResponseStructure<String> response = new ResponseStructure<>();
+		response.setStatusCode(HttpStatus.FORBIDDEN.value());
+		response.setMessage(HttpStatus.FORBIDDEN.getReasonPhrase());
+		response.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(response, HttpStatus.FORBIDDEN);
+	}
 
 
 }

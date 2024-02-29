@@ -45,12 +45,7 @@ public class Branch {
 	@JoinColumn
 	private HeadOffice headOffice;
 	
-	public int getFloorsCount() {
-		return floorsCount;
-	}
-	public void setFloorsCount(int floorsCount) {
-		this.floorsCount = floorsCount;
-	}
+	
 	
 	public HeadOffice getHeadOffice() {
 		return headOffice;
