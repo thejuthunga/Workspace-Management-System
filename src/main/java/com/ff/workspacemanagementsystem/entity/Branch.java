@@ -35,6 +35,9 @@ public class Branch {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
 	private List<Review> reviews=new ArrayList<Review>();
+
+	
+	
 	
 	@JsonIgnore
 	@ManyToOne
