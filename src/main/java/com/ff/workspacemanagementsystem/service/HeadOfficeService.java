@@ -44,7 +44,7 @@ public class HeadOfficeService {
 	// Find All Head Office
 	public ResponseEntity<ResponseStructure<List<HeadOffice>>> findAllHeadOffice() {
 		List<HeadOffice> receivedHeadOffice = headOfficeDao.findAllHeadOffice();
-		if (receivedHeadOffice != null) {
+		if (receivedHeadOffice.size() > 0 && receivedHeadOffice != null) {
 			ResponseStructure<List<HeadOffice>> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Found");

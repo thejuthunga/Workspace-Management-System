@@ -43,6 +43,7 @@ public class Branch {
 	@JoinColumn
 	private HeadOffice headOffice;
 	
+
 	public int getFloorsCount() {
 		return floorsCount;
 	}
@@ -57,7 +58,6 @@ public class Branch {
 	public void setHeadOffice(HeadOffice headOffice) {
 		this.headOffice = headOffice;
 	}
-
 	public int getBranchId() {
 		return branchId;
 	}
