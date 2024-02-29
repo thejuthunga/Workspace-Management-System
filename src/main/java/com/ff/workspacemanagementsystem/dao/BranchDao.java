@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ff.workspacemanagementsystem.entity.Address;
 import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.entity.HeadOffice;
 import com.ff.workspacemanagementsystem.exception.BranchNotFoundException;
@@ -24,7 +25,7 @@ public class BranchDao {
 	public Branch saveBranch(int id, Branch branch) {
 		Optional<HeadOffice> optional = headOfficeRepository.findById(id);
 
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			HeadOffice headOffice = optional.get();
 			List<Branch> branches = optional.get().getBranches();
 			branches.add(branch);
@@ -33,13 +34,11 @@ public class BranchDao {
 		return branchRepository.save(branch);
 	}
 
-	
-	
-	public Branch updateBranch(int id,Branch branch) {
+	public Branch updateBranch(int id, Branch branch) {
 		Optional<Branch> optional = branchRepository.findById(id);
-		if(optional.isPresent()) {
-			 Branch branchOptional = optional.get();
-			 branch.setBranchId(branchOptional.getBranchId()); 
+		if (optional.isPresent()) {
+			Branch branchOptional = optional.get();
+			branch.setBranchId(branchOptional.getBranchId());
 			return branchRepository.save(branch);
 
 		}
@@ -69,5 +68,18 @@ public class BranchDao {
 			return optional.get().getBranches();
 		}
 		throw new BranchNotFoundException();
+	}
+
+	// update Address
+	public Address updateAddress(int branchId, Address address) {
+		Branch branch =findBranch(branchId);
+		if (branch != null) {
+			Address address1 = branch.getAddress();
+			address.setAddressId(address1.getAddressId());
+			branch.setAddress(address);
+			branchRepository.save(branch);
+			return address;
+		}
+		throw new NullPointerException();
 	}
 }

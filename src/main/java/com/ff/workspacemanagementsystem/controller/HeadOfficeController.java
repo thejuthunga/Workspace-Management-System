@@ -17,7 +17,7 @@ import com.ff.workspacemanagementsystem.entity.HeadOffice;
 import com.ff.workspacemanagementsystem.service.HeadOfficeService;
 
 @RestController
-@RequestMapping("/wms")
+@RequestMapping("/")
 public class HeadOfficeController {
 
 	@Autowired
