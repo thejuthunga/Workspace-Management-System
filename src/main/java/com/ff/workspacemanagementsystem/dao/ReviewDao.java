@@ -18,76 +18,79 @@ public class ReviewDao {
 	private ReviewRepository reviewRepository;
 	@Autowired
 	private BranchRepository branchRepository;
-	
-	//save Review
-	public List<Review> saveReview(int id,Review review) {
-		Optional<Branch> opt=branchRepository.findById(id);
-		if(opt.isPresent()) {
-			Branch branch=opt.get();
-			List<Review> reviews=branch.getReviews();
+
+	// save Review
+	public List<Review> saveReview(int id, Review review) {
+		Optional<Branch> opt = branchRepository.findById(id);
+		if (opt.isPresent()) {
+			Branch branch = opt.get();
+			List<Review> reviews = branch.getReviews();
 			reviews.add(review);
 			branch.setReviews(reviews);
+			review.setBranch(branch);
 			reviewRepository.save(review);
 			branchRepository.save(branch);
-			
+
 			return reviews;
-		}
-		else {
+		} else {
 			throw new IdNotFoundException("ID: " + id + " Not Found");
 		}
 	}
-	
-	//get review
-	public List<Review> getReview(int b_id){
-		Optional<Branch> opt=branchRepository.findById(b_id);
-		if(opt.isPresent()) {
+
+	// get review
+	public List<Review> getReview(int b_id) {
+		Optional<Branch> opt = branchRepository.findById(b_id);
+		if (opt.isPresent()) {
 			return opt.get().getReviews();
-		}
-		else {
+		} else {
 			throw new IdNotFoundException("ID: " + b_id + " Not Found");
 		}
 	}
-	
-	//delete Review
-	public Review deleteReview(int b_id,int r_id) {
-		Optional<Branch> opt=branchRepository.findById(b_id);
-		if(opt.isPresent()) {
-			Review review=null;
-			Branch branch=opt.get();
-			List<Review> reviews=branch.getReviews();
-			for(Review r:reviews) {
-				if(r.getReviewid()==r_id) {
-					review=r;
+
+	// delete Review
+	public Review deleteReview(int b_id, int r_id) {
+		Optional<Branch> opt = branchRepository.findById(b_id);
+		if (opt.isPresent()) {
+			Review review = null;
+			Branch branch = opt.get();
+			List<Review> reviews = branch.getReviews();
+			for (Review r : reviews) {
+				if (r.getReviewid() == r_id) {
+					review = r;
 					break;
 				}
 			}
-			if(review != null && review instanceof Review) {
+			if (review != null && review instanceof Review) {
 				reviews.remove(review);
 				branch.setReviews(reviews);
 				branchRepository.save(branch);
 				reviewRepository.delete(review);
 			}
 			return review;
-		}
-		else {
+		} else {
 			throw new IdNotFoundException("ID: " + b_id + " Not Found");
 		}
 	}
-	
-	//update Review
-	public Review updateReview(int b_id,int r_id,Review review) {
-		Optional<Branch> opt=branchRepository.findById(b_id);
-		if(opt.isPresent()) {
-			Branch b=opt.get();
-			List<Review> reviews=b.getReviews();
-			for(Review r:reviews) {
-				if(r.getReviewid()==r_id) {
-					reviewRepository.save(review);
+
+	// update Review
+	public Review updateReview(int b_id, int r_id, Review review) {
+		Optional<Branch> opt = branchRepository.findById(b_id);
+		Review rev = null;
+		if (opt.isPresent()) {
+			Branch b = opt.get();
+			List<Review> reviews = b.getReviews();
+			for (Review r : reviews) {
+				if (r.getReviewid() == r_id) {
+					r.setReviewid(r.getReviewid());
+					r.setFeedback(review.getFeedback());
+					r.setRating(review.getRating());
+					r.setBranch(r.getBranch());
+					reviewRepository.save(r);
+					rev=r;
 				}
 			}
-			return null;
-		}
-		else {
+			return rev;
+		} else {
 			throw new IdNotFoundException("ID: " + b_id + " Not Found");
 		}
 	}
