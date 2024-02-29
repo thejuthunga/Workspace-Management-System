@@ -1,5 +1,6 @@
 package com.ff.workspacemanagementsystem.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,11 +30,11 @@ public class Branch {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
-	private List<Floors> floors;
+	private List<Floors> floors=new ArrayList<Floors>();
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
-	private List<Review> reviews;
+	private List<Review> reviews=new ArrayList<Review>();
 	
 	@JsonIgnore
 	@ManyToOne
