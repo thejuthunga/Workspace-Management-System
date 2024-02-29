@@ -33,4 +33,5 @@ public class ApplicationException extends ResponseEntityExceptionHandler {
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+
 }
