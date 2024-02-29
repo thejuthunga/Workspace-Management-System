@@ -2,6 +2,7 @@ package com.ff.workspacemanagementsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +21,16 @@ public class Review {
 	private double rating;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn
 	private Branch branch;
 	
+	public Branch getBranch() {
+		return branch;
+	}
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
 	public int getReviewid() {
 		return reviewid;
 	}
