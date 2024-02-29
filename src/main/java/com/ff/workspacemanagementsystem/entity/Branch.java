@@ -25,15 +25,16 @@ public class Branch {
 	private int branchId;
 	private long branchContact;
 	private int floorsCount;
-	@Schema(hidden = true)
+	
 	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
 	@JoinColumn
 	private Address address;
 	
-	
+	@Schema(hidden = true)
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
 	private List<Floors> floors= new ArrayList<Floors>();
 	
+	@Schema(hidden = true)
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
 	private List<Review> reviews =new ArrayList<Review>();
