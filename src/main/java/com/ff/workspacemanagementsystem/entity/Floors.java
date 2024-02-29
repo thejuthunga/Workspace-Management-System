@@ -19,6 +19,8 @@ public class Floors {
 	private int noOfWorkstations;
 	private boolean isCafeAvailable;
 	
+	private boolean isfloorAvailable;
+	
 	@OneToOne
 	@JoinColumn
 	private Users users;
@@ -74,6 +76,14 @@ public class Floors {
 
 	public void setCafeAvailable(boolean isCafeAvailable) {
 		this.isCafeAvailable = isCafeAvailable;
+	}
+
+	public boolean isIsfloorAvailable() {
+		return isfloorAvailable;
+	}
+
+	public void setIsfloorAvailable(boolean isfloorAvailable) {
+		this.isfloorAvailable = isfloorAvailable;
 	}
 	
 	
