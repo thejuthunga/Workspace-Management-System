@@ -26,7 +26,7 @@ public class Users {
 	private String userEmail;
 	private int employeeCount;
 
-	@OneToOne(mappedBy = "users", cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "users", cascade = CascadeType.MERGE)
 	private Floors floors;
 
 	public int getUserId() {

@@ -1,5 +1,6 @@
 package com.ff.workspacemanagementsystem.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,12 +20,14 @@ public class Floors {
 	private int noOfWorkstations;
 	private boolean isCafeAvailable;
 	
-	@OneToOne
+	private boolean isfloorAvailable;
+	
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn
 	private Users users;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn
 	private Branch branch;
 
@@ -75,6 +78,13 @@ public class Floors {
 	public void setCafeAvailable(boolean isCafeAvailable) {
 		this.isCafeAvailable = isCafeAvailable;
 	}
-	
+
+	public boolean isIsfloorAvailable() {
+		return isfloorAvailable;
+	}
+
+	public void setIsfloorAvailable(boolean isfloorAvailable) {
+		this.isfloorAvailable = isfloorAvailable;
+	}
 	
 }

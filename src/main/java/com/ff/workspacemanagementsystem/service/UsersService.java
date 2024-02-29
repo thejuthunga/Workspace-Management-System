@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ff.workspacemanagementsystem.dao.UsersDao;
 import com.ff.workspacemanagementsystem.dto.ResponseStructure;
+import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.entity.Users;
 
 @Service
@@ -34,9 +35,9 @@ public class UsersService {
 		return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<Users>> find(int id) {
+	public ResponseEntity<ResponseStructure<Users>> findUserById(int id) {
 
-		Users user = usersDao.find(id);
+		Users user = usersDao.findUserById(id);
 
 		responseStructure.setStatusCode(HttpStatus.OK.value());
 		responseStructure.setMessage(HttpStatus.OK.getReasonPhrase());
@@ -60,12 +61,11 @@ public class UsersService {
 
 		List<Users> user = usersDao.findAllClients();
 
-		ResponseStructure<List<Users>> responseStructure = new ResponseStructure<List<Users>>();
-		responseStructure.setStatusCode(HttpStatus.OK.value());
-		responseStructure.setMessage(HttpStatus.OK.getReasonPhrase());
-		responseStructure.setData(user);
+		responseStructureList.setStatusCode(HttpStatus.OK.value());
+		responseStructureList.setMessage(HttpStatus.OK.getReasonPhrase());
+		responseStructureList.setData(user);
 
-		return new ResponseEntity<ResponseStructure<List<Users>>>(responseStructure, HttpStatus.OK);
+		return new ResponseEntity<ResponseStructure<List<Users>>>(responseStructureList, HttpStatus.OK);
 	}
 
 	public ResponseEntity<ResponseStructure<Users>> update(int id, Users user) {
@@ -90,6 +90,18 @@ public class UsersService {
 		responseStructure.setData("User details with id "+id+"is deleted.");
 
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<ResponseStructure<Floors>> addFloorToClient(int a_id, int c_id, Floors floor) {
+
+		usersDao.addFloorToClient(a_id, c_id, floor);
+
+		ResponseStructure<Floors> responseStructure = new ResponseStructure<Floors>();
+		responseStructure.setStatusCode(HttpStatus.CREATED.value());
+		responseStructure.setMessage(HttpStatus.CREATED.getReasonPhrase());
+		responseStructure.setData(floor);
+
+		return new ResponseEntity<ResponseStructure<Floors>>(responseStructure, HttpStatus.CREATED);
 	}
 
 }

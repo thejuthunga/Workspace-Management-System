@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ff.workspacemanagementsystem.dto.ResponseStructure;
+import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.entity.Users;
 import com.ff.workspacemanagementsystem.service.UsersService;
 
@@ -25,7 +26,7 @@ public class UsersController {
 
 	@GetMapping("/user/{id}")
 	public ResponseEntity<ResponseStructure<Users>> find(@PathVariable int id) {
-		return usersService.find(id);
+		return usersService.findUserById(id);
 	}
 
 	@GetMapping("/admins")
@@ -46,5 +47,10 @@ public class UsersController {
 	@DeleteMapping("/user/{id}")
 	public ResponseEntity<ResponseStructure<String>> delete(@PathVariable int id) {
 		return usersService.delete(id);
+	}
+	
+	@PostMapping("/addFloorToClient/{a_id}/{c_id}")
+	public ResponseEntity<ResponseStructure<Floors>> addFloorToClient(@PathVariable int a_id,@PathVariable int c_id, @RequestBody Floors floor){
+		return usersService.addFloorToClient(a_id, c_id, floor);
 	}
 }

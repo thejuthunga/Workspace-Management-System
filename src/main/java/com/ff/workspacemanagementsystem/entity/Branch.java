@@ -22,6 +22,7 @@ public class Branch {
 	@SequenceGenerator(name = "branch_seq_gen",allocationSize = 5,initialValue = 100,sequenceName = "branch_sequence")
 	private int branchId;
 	private long branchContact;
+	private int floorsCount;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
@@ -79,6 +80,21 @@ public class Branch {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
+
+	public int getFloorsCount() {
+		return floorsCount;
+	}
+
+	public void setFloorsCount(int floorsCount) {
+		this.floorsCount = floorsCount;
+	}
+
+	public HeadOffice getHeadOffice() {
+		return headOffice;
+	}
+
+	public void setHeadOffice(HeadOffice headOffice) {
+		this.headOffice = headOffice;
+	}
 	
 }
