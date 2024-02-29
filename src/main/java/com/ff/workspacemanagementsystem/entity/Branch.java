@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +25,8 @@ public class Branch {
 	private int branchId;
 	private long branchContact;
 	private int floorsCount;
-
-	@OneToOne(cascade = CascadeType.ALL)
+	@Schema(hidden = true)
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
 	@JoinColumn
 	private Address address;
 	

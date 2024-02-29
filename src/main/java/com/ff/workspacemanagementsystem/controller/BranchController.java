@@ -36,9 +36,9 @@ public class BranchController {
 	public ResponseEntity<ResponseStructure<List<Branch>>> findAllBranch(@PathVariable int id){
 		return service.findAllBranch(id);
 	}
-	@PutMapping("/update/{id}")
-	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@PathVariable int id,@RequestBody Branch branch){
-		return service.Updatebranch(id, branch);
+	@PutMapping("/update/{h_id}/branch/{id}")
+	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@PathVariable int h_id, @PathVariable int id,@RequestBody Branch branch){
+		return service.Updatebranch(h_id,id, branch);
 	}
 	@DeleteMapping("/branch/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteBranch(@PathVariable int id){

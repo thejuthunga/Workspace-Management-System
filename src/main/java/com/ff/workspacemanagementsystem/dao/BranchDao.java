@@ -33,12 +33,13 @@ public class BranchDao {
 		return branchRepository.save(branch);
 	}
 	
-	public Branch updateBranch(int id,Branch branch) {
-		Optional<Branch> optional = branchRepository.findById(id);
+	public Branch updateBranch(int h_id,int b_id,Branch branch) {
+		Optional<Branch> optional = branchRepository.findById(b_id);
 		if(optional.isPresent()) {
 			 Branch branchOptional = optional.get();
+			 branch.setAddress(branchOptional.getAddress());
+			 branch.setHeadOffice(branchOptional.getHeadOffice());
 			 branch.setBranchId(branchOptional.getBranchId());
-			 
 			return branchRepository.save(branch);
 		}
 		throw new BranchNotFoundException();
