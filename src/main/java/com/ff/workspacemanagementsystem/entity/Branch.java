@@ -41,6 +41,7 @@ public class Branch {
 	@JoinColumn
 	private HeadOffice headOffice;
 	
+	
 	public int getBranchId() {
 		return branchId;
 	}

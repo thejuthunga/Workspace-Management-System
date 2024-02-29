@@ -8,5 +8,6 @@ public class WorkspaceManagementSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WorkspaceManagementSystemApplication.class, args);
+//		System.exit(0);
 	}
 }
