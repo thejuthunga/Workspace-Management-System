@@ -1,9 +1,8 @@
 package com.ff.workspacemanagementsystem.exception;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +24,30 @@ public class ApplicationException extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
+
+	
+	
+	//floor exceed
+	@ExceptionHandler(FloorsExceededException.class)
+	public ResponseEntity<ResponseStructure<String>> catchFloorException(FloorsExceededException exception){
+		ResponseStructure<String> response = new ResponseStructure<>();
+		response.setStatusCode(HttpStatus.FORBIDDEN.value());
+		response.setMessage(HttpStatus.FORBIDDEN.getReasonPhrase());
+		response.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(response, HttpStatus.FORBIDDEN);
+	}
+
+
+	
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<ResponseStructure<String>> user_exception(NullPointerException exception) {
+
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage(HttpStatus.NOT_FOUND.getReasonPhrase());
+		responseStructure.setData("Details is not found.");
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+	}
 	@ExceptionHandler(IdNotFoundException.class)
 	public ResponseEntity<ResponseStructure<String>> catchIdDoesNotFoundExceptions(
 			IdNotFoundException exception) {
@@ -32,6 +55,7 @@ public class ApplicationException extends ResponseEntityExceptionHandler {
 		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("NOT FOUND");
 		responseStructure.setData(exception.getMessage());
+
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
