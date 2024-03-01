@@ -24,11 +24,7 @@ public class HeadOfficeDao {
 		HeadOffice receivedHeadOffice = findHeadOfficeById(id);
 		if (receivedHeadOffice != null) {
 			headOffice.setOfficeId(receivedHeadOffice.getOfficeId());
-//			headOffice.setOfficeName(receivedHeadOffice.getOfficeName());
-//			headOffice.setOfficeEmail(receivedHeadOffice.getOfficeEmail());
-//			headOffice.setOfficeWebsite(receivedHeadOffice.getOfficeWebsite());
-//			headOffice.setBranchHead(receivedHeadOffice.getBranchHead());
-//			headOffice.setBranches(receivedHeadOffice.getBranches());
+			headOffice.setBranches(receivedHeadOffice.getBranches());
 			return headOfficeRepository.save(headOffice);
 		} else {
 			return null;

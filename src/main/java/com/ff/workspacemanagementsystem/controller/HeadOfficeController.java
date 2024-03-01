@@ -16,6 +16,9 @@ import com.ff.workspacemanagementsystem.dto.ResponseStructure;
 import com.ff.workspacemanagementsystem.entity.HeadOffice;
 import com.ff.workspacemanagementsystem.service.HeadOfficeService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 @RestController
 @RequestMapping("/")
 public class HeadOfficeController {
@@ -24,25 +27,33 @@ public class HeadOfficeController {
 	private HeadOfficeService headOfficeService;
 
 	// Save Head Office
+	@Operation(description = "Add HeadOffice",summary = "add headoffice")
+	@ApiResponse(description = "HeadOffice Created",responseCode = "201")
 	@PostMapping("/headOffice")
 	public ResponseEntity<ResponseStructure<HeadOffice>> saveHeadOffice(@RequestBody HeadOffice headOffice) {
 		return headOfficeService.saveHeadOffice(headOffice);
 	}
 
 	// update Head Office
+	@Operation(description = "Update HeadOffice",summary = "update headoffice")
+	@ApiResponse(description = "OK",responseCode = "200")
 	@PutMapping("/headOffice/{headOfficeId}")
 	public ResponseEntity<ResponseStructure<HeadOffice>> updateHeadOffice(@PathVariable int headOfficeId,
 			@RequestBody HeadOffice headOffice) {
 		return headOfficeService.updateHeadOffice(headOfficeId, headOffice);
 	}
 
-	// Find all Head Office
+	// Find  Head Office
+	@Operation(description = "Find HeadOffice",summary = "find headoffice")
+	@ApiResponse(description = "Found",responseCode = "302")
 	@GetMapping("/headOffice/{headOfficeId}")
 	public ResponseEntity<ResponseStructure<HeadOffice>> findHeadOfficeById(@PathVariable int headOfficeId) {
 		return headOfficeService.findHeadOfficeById(headOfficeId);
 	}
 
 	// find all head office
+	@Operation(description = "Find All HeadOffice",summary = "find all head office")
+	@ApiResponse(description = "Found",responseCode = "302")
 	@GetMapping("/headOffice")
 	public ResponseEntity<ResponseStructure<List<HeadOffice>>> findAllHeadOffice() {
 		return headOfficeService.findAllHeadOffice();
