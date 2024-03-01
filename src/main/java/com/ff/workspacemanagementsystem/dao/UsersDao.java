@@ -25,7 +25,7 @@ public class UsersDao {
 
 	@Autowired
 	private FloorsRepository floorsRepository;
-	
+
 	@Autowired
 	private BranchRepository branchRepository;
 
@@ -90,11 +90,11 @@ public class UsersDao {
 		List<Floors> floors = branch.getFloors();
 
 		for (Floors f : floors) {
-			if (branch.getFloorsCount() >= 1) {
+			if (branch.getfloorsCount() >= 1) {
 				if (f.getNoOfWorkstations() >= client.getEmployeeCount()) {
 					f.setUsers(client);
 					f.setIsfloorAvailable(false);
-					branch.setFloorsCount(branch.getFloorsCount() - 1);
+					branch.setfloorsCount(branch.getfloorsCount() - 1);
 					branchRepository.save(branch);
 					floorsRepository.save(f);
 					break;
@@ -117,9 +117,9 @@ public class UsersDao {
 				floor.setUsers(null);
 				floor.setIsfloorAvailable(true);
 				Branch branch = floor.getBranch();
-				int f_count = branch.getFloorsCount();
+				int f_count = branch.getfloorsCount();
 				f_count++;
-				branch.setFloorsCount(f_count);
+				branch.setfloorsCount(f_count);
 				floor.setBranch(branch);
 				floorsRepository.save(floor);
 			} else {
