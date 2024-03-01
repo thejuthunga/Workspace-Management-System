@@ -28,16 +28,11 @@ public class FloorDao {
 		return null;
 	}
 	
-	public Floors updateFloor(int floorid,Floors floors) {
-		Floors getFloor = getFloorById(floorid);
+	public Floors updateFloor(Floors floors) {
 		
-		if(getFloor != null) {
-			floors.setFloorid(getFloor.getFloorid());
 			
 			return floorRepository.save(floors);
-		}
 		
-		return null;
 	}
 	
 	public String deleteFloor(int floorid) {

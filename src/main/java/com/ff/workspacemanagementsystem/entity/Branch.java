@@ -95,6 +95,7 @@ public class Branch {
 		this.reviews = reviews;
 	}
 
+
 	public int getfloorsCount() {
 		return floorsCount;
 	}
@@ -104,5 +105,22 @@ public class Branch {
 	}
 
 	
+//=======
+//	public int getFloorsCount() {
+//		return floorsCount;
+//	}
+//
+//	public void setFloorsCount(int floorsCount) {
+//		this.floorsCount = floorsCount;
+//	}
+//
+//	public HeadOffice getHeadOffice() {
+//		return headOffice;
+//	}
+//
+//	public void setHeadOffice(HeadOffice headOffice) {
+//		this.headOffice = headOffice;
+//	}
+//>>>>>>> ffa317e2102685a8ef8610f1eb24fdc3102230a3
 	
 }
