@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
+
 @Entity
 public class Floors {
 	@Id
@@ -74,7 +75,5 @@ public class Floors {
 
 	public void setCafeAvailable(boolean isCafeAvailable) {
 		this.isCafeAvailable = isCafeAvailable;
-	}
-	
-	
+	}	
 }
