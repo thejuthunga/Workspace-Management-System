@@ -1,16 +1,7 @@
 package com.ff.workspacemanagementsystem.entity;
 
 import com.ff.workspacemanagementsystem.utility.UsersRole;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 
 @Entity
 public class Users {
@@ -50,7 +41,7 @@ public class Users {
 		return userRole;
 	}
 
-	public void setUserRole(UsersRole userRole) {
+	public void setUsersRole(UsersRole userRole) {
 		this.userRole = userRole;
 	}
 

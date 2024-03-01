@@ -45,8 +45,6 @@ public class Branch {
 	@JoinColumn
 	private HeadOffice headOffice;
 	
-
-	
 	public HeadOffice getHeadOffice() {
 		return headOffice;
 	}
@@ -94,32 +92,11 @@ public class Branch {
 		this.reviews = reviews;
 	}
 
-
-	public int getfloorsCount() {
+	public int getFloorsCount() {
 		return floorsCount;
 	}
 
-	public void setfloorsCount(int floorsCount) {
+	public void setFloorsCount(int floorsCount) {
 		this.floorsCount = floorsCount;
 	}
-
-	
-//=======
-//	public int getFloorsCount() {
-//		return floorsCount;
-//	}
-//
-//	public void setFloorsCount(int floorsCount) {
-//		this.floorsCount = floorsCount;
-//	}
-//
-//	public HeadOffice getHeadOffice() {
-//		return headOffice;
-//	}
-//
-//	public void setHeadOffice(HeadOffice headOffice) {
-//		this.headOffice = headOffice;
-//	}
-//>>>>>>> ffa317e2102685a8ef8610f1eb24fdc3102230a3
-	
 }
