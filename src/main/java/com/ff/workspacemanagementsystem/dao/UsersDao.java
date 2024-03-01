@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.entity.Users;
+import com.ff.workspacemanagementsystem.exception.FloorsCountReachedException;
+import com.ff.workspacemanagementsystem.exception.NoFloorsMatchedException;
+import com.ff.workspacemanagementsystem.repository.BranchRepository;
 import com.ff.workspacemanagementsystem.repository.FloorsRepository;
 import com.ff.workspacemanagementsystem.repository.UsersRepository;
 import com.ff.workspacemanagementsystem.utility.UsersRole;
@@ -23,9 +26,14 @@ public class UsersDao {
 	@Autowired
 	private FloorsRepository floorsRepository;
 
+	@Autowired
+	private BranchRepository branchRepository;
+	
+	@Autowired
+	private BranchDao branchDao;
+	
+	
 	public Users save(Users user) {
-
-//		user.setFloors(new Floors());
 		return usersRepository.save(user);
 	}
 
@@ -64,7 +72,12 @@ public class UsersDao {
 
 		Users avl_user = findUserById(id);
 		if (avl_user.getUserId() == user.getUserId()) {
-			return usersRepository.save(user);
+			avl_user.setUserId(id);
+			avl_user.setUserName(user.getUserName());
+			avl_user.setUserEmail(user.getUserEmail());
+			avl_user.setEmployeeCount(user.getEmployeeCount());
+			avl_user.setUsersRole(user.getUsersRole());
+			return usersRepository.save(avl_user);
 		} else {
 			return null;
 		}
@@ -76,29 +89,56 @@ public class UsersDao {
 		usersRepository.delete(user);
 	}
 
-	public Floors addFloorToClient(int a_id, int c_id, Floors f) {
+	public void addFloorToClient(int a_id, int c_id, int b_id) {
 		Users admin = findUserById(a_id);
 		Users client = findUserById(c_id);
 		
-		Branch branch = null;
-		
-		if(admin.getUsersRole() == UsersRole.ADMIN && client.getUsersRole() == UsersRole.CLIENT) {
-			List<Floors> branch_floors = client.getFloors().getBranch().getFloors();
-			if(branch_floors == null) {
-				branch_floors = new ArrayList<Floors>();
-				branch = client.getFloors().getBranch();
+		Branch branch = branchDao.findBranch(b_id);
+		List<Floors> floors = branch.getFloors();
+
+		if(admin.getUsersRole() == UsersRole.ADMIN) {
+			for (Floors f : floors) {
+				if (branch.getFloorsCount() >= 1) {
+					if (f.getNoOfWorkstations() >= client.getEmployeeCount()) {
+						f.setUsers(client);
+						f.setIsfloorAvailable(false);
+						branch.setFloorsCount(branch.getFloorsCount() - 1);
+						branchRepository.save(branch);
+						floorsRepository.save(f);
+						break;
+					} else {
+						throw new NoFloorsMatchedException("No floors matching with your requirements");
+					}
+				} else {
+					throw new NullPointerException();
+				}
 			}
-			f.setIsfloorAvailable(false);
-			floorsRepository.save(f);
-			f.setIsfloorAvailable(f.isIsfloorAvailable());
-			if(branch_floors.size() < branch.getfloorsCount()) {
-				branch_floors.add(f);
-				usersRepository.save(f.getUsers());
-			}
-			return f;
-		}else {
-			throw new NullPointerException();
 		}
 	}
 
+	public boolean removeClientFromFloor(int a_id, int f_id) {
+		Floors floor = null;
+
+		if (findUserById(a_id).getUsersRole() == UsersRole.ADMIN) {
+			Optional<Floors> opt_floor = floorsRepository.findById(f_id);
+			if (opt_floor.isPresent()) {
+				floor = opt_floor.get();
+				floor.setUsers(null);
+				floor.setIsfloorAvailable(true);
+				Branch branch = floor.getBranch();
+				int f_count = branch.getFloorsCount();
+				f_count++;
+				branch.setFloorsCount(f_count);
+				floor.setBranch(branch);
+				floorsRepository.save(floor);
+			} else {
+				throw new FloorsCountReachedException("No clients in the floor to remove");
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }

@@ -28,7 +28,7 @@ public class FloorsService {
 	public ResponseEntity<ResponseStructure<String>> saveFloor(int branchid, Floors floors) {
 
 		Branch branch = branchDao.findBranch(branchid);
-		if (branch.getFloors().size() < branch.getfloorsCount()) {
+		if (branch.getFloors().size() < branch.getFloorsCount()) {
 			if (branch != null) {
 				floors.setBranch(branch);
 				branch.getFloors().add(floors);

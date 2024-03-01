@@ -18,38 +18,53 @@ import com.ff.workspacemanagementsystem.entity.Address;
 import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.service.BranchService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 @RestController
 @RequestMapping("/")
 public class BranchController {
 	@Autowired
 	BranchService service;
 
-	@PostMapping("/headoffice/{id}/addbranch")
-	public ResponseEntity<ResponseStructure<Branch>> saveBranch(@PathVariable int id, @RequestBody Branch branch) {
-		return service.saveBranch(id, branch);
+	@Operation(description = "Add Branch",summary = "add branch")
+	@ApiResponse(description = "Branch Created",responseCode = "201")
+	@PostMapping("/headoffice/{headOfficeId}/addbranch")
+	public ResponseEntity<ResponseStructure<Branch>> saveBranch(@PathVariable int headOfficeId, @RequestBody Branch branch) {
+		return service.saveBranch(headOfficeId, branch);
 	}
 
-	@GetMapping("/branch/{id}")
-	public ResponseEntity<ResponseStructure<Branch>> findbranch(@PathVariable int id) {
-		return service.findbranch(id);
+	@Operation(description = "Find Branch",summary = "find branch")
+	@ApiResponse(description = "Branch Found",responseCode = "302")
+	@GetMapping("/branch/{branchId}")
+	public ResponseEntity<ResponseStructure<Branch>> findbranch(@PathVariable int branchId) {
+		return service.findbranch(branchId);
 	}
 
-	@GetMapping("/allbranch/{id}")
-	public ResponseEntity<ResponseStructure<List<Branch>>> findAllBranch(@PathVariable int id) {
-		return service.findAllBranch(id);
+	@Operation(description = "Find All Branch",summary = "find all branch")
+	@ApiResponse(description = "Branch Found",responseCode = "302")
+	@GetMapping("/allbranch/{headOfficeId}")
+	public ResponseEntity<ResponseStructure<List<Branch>>> findAllBranch(@PathVariable int headOfficeId) {
+		return service.findAllBranch(headOfficeId);
 	}
 
-	@PutMapping("/update/{h_id}/branch/{id}")
-	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@PathVariable int h_id, @PathVariable int id,@RequestBody Branch branch){
-		return service.Updatebranch(h_id,id, branch);
+	@Operation(description = "Update Branch",summary = "update branch")
+	@ApiResponse(description = "OK",responseCode = "200")
+	@PutMapping("/update/{h_id}/branch/{branchId}")
+	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@PathVariable int h_id, @PathVariable int branchId,@RequestBody Branch branch){
+		return service.Updatebranch(h_id,branchId, branch);
 	}
 
-	@DeleteMapping("/branch/{id}")
-	public ResponseEntity<ResponseStructure<String>> deleteBranch(@PathVariable int id) {
-		return service.deletebranch(id);
+	@Operation(description = "Delete Branch",summary = "delete branch")
+	@ApiResponse(description = "OK",responseCode = "200")
+	@DeleteMapping("/branch/{branchId}")
+	public ResponseEntity<ResponseStructure<String>> deleteBranch(@PathVariable int branchId) {
+		return service.deletebranch(branchId);
 
 	}
 
+	@Operation(description = "Update Address",summary = "update address")
+	@ApiResponse(description = "OK",responseCode = "200")
 	// Update Address
 	@PutMapping("/address/{branchId}")
 	public ResponseEntity<ResponseStructure<Address>> updateAddress(@PathVariable int branchId,
