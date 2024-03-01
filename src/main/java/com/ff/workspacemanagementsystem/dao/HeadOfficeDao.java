@@ -23,9 +23,12 @@ public class HeadOfficeDao {
 	public HeadOffice updateHeadOffice(int id, HeadOffice headOffice) {
 		HeadOffice receivedHeadOffice = findHeadOfficeById(id);
 		if (receivedHeadOffice != null) {
-			int number=receivedHeadOffice.getOfficeId();
-			headOfficeRepository.delete(receivedHeadOffice);
-			headOffice.setOfficeId(number);
+			headOffice.setOfficeId(receivedHeadOffice.getOfficeId());
+//			headOffice.setOfficeName(receivedHeadOffice.getOfficeName());
+//			headOffice.setOfficeEmail(receivedHeadOffice.getOfficeEmail());
+//			headOffice.setOfficeWebsite(receivedHeadOffice.getOfficeWebsite());
+//			headOffice.setBranchHead(receivedHeadOffice.getBranchHead());
+//			headOffice.setBranches(receivedHeadOffice.getBranches());
 			return headOfficeRepository.save(headOffice);
 		} else {
 			return null;
