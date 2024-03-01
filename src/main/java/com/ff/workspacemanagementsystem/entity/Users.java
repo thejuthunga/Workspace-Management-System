@@ -41,7 +41,7 @@ public class Users {
 		return userRole;
 	}
 
-	public void setUserRole(UsersRole userRole) {
+	public void setUsersRole(UsersRole userRole) {
 		this.userRole = userRole;
 	}
 

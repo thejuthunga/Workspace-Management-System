@@ -28,7 +28,11 @@ public class UsersDao {
 
 	@Autowired
 	private BranchRepository branchRepository;
-
+	
+	@Autowired
+	private BranchDao branchDao;
+	
+	
 	public Users save(Users user) {
 		return usersRepository.save(user);
 	}
@@ -68,7 +72,12 @@ public class UsersDao {
 
 		Users avl_user = findUserById(id);
 		if (avl_user.getUserId() == user.getUserId()) {
-			return usersRepository.save(user);
+			avl_user.setUserId(id);
+			avl_user.setUserName(user.getUserName());
+			avl_user.setUserEmail(user.getUserEmail());
+			avl_user.setEmployeeCount(user.getEmployeeCount());
+			avl_user.setUsersRole(user.getUsersRole());
+			return usersRepository.save(avl_user);
 		} else {
 			return null;
 		}
@@ -83,26 +92,26 @@ public class UsersDao {
 	public void addFloorToClient(int a_id, int c_id, int b_id) {
 		Users admin = findUserById(a_id);
 		Users client = findUserById(c_id);
-		Optional<Branch> opt_branch = branchRepository.findById(b_id);
-
-		Branch branch = opt_branch.get();
-
+		
+		Branch branch = branchDao.findBranch(b_id);
 		List<Floors> floors = branch.getFloors();
 
-		for (Floors f : floors) {
-			if (branch.getfloorsCount() >= 1) {
-				if (f.getNoOfWorkstations() >= client.getEmployeeCount()) {
-					f.setUsers(client);
-					f.setIsfloorAvailable(false);
-					branch.setfloorsCount(branch.getfloorsCount() - 1);
-					branchRepository.save(branch);
-					floorsRepository.save(f);
-					break;
+		if(admin.getUsersRole() == UsersRole.ADMIN) {
+			for (Floors f : floors) {
+				if (branch.getFloorsCount() >= 1) {
+					if (f.getNoOfWorkstations() >= client.getEmployeeCount()) {
+						f.setUsers(client);
+						f.setIsfloorAvailable(false);
+						branch.setFloorsCount(branch.getFloorsCount() - 1);
+						branchRepository.save(branch);
+						floorsRepository.save(f);
+						break;
+					} else {
+						throw new NoFloorsMatchedException("No floors matching with your requirements");
+					}
 				} else {
-					throw new NoFloorsMatchedException("No floors matching with your requirements");
+					throw new NullPointerException();
 				}
-			} else {
-				throw new NullPointerException();
 			}
 		}
 	}
@@ -117,9 +126,9 @@ public class UsersDao {
 				floor.setUsers(null);
 				floor.setIsfloorAvailable(true);
 				Branch branch = floor.getBranch();
-				int f_count = branch.getfloorsCount();
+				int f_count = branch.getFloorsCount();
 				f_count++;
-				branch.setfloorsCount(f_count);
+				branch.setFloorsCount(f_count);
 				floor.setBranch(branch);
 				floorsRepository.save(floor);
 			} else {

@@ -92,12 +92,11 @@ public class Branch {
 		this.reviews = reviews;
 	}
 
-	public int getfloorsCount() {
+	public int getFloorsCount() {
 		return floorsCount;
 	}
 
-	public void setfloorsCount(int floorsCount) {
+	public void setFloorsCount(int floorsCount) {
 		this.floorsCount = floorsCount;
 	}
-	
 }

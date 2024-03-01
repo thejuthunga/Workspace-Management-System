@@ -49,9 +49,9 @@ public class UsersController {
 		return usersService.delete(id);
 	}
 	
-	@PostMapping("/addFloorToClient/{a_id}/{c_id}/{f_id}")
-	public ResponseEntity<ResponseStructure<String>> addFloorToClient(@PathVariable int a_id,@PathVariable int c_id, @PathVariable int f_id){
-		return usersService.addFloorToClient(a_id, c_id, f_id);
+	@PostMapping("/addFloorToClient/{a_id}/{c_id}/{b_id}")
+	public ResponseEntity<ResponseStructure<String>> addFloorToClient(@PathVariable int a_id,@PathVariable int c_id, @PathVariable int b_id){
+		return usersService.addFloorToClient(a_id, c_id, b_id);
 	}
 	
 	@DeleteMapping("/removeClientFromFloor/{a_id}/{f_id}")
