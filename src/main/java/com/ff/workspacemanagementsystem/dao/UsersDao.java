@@ -12,6 +12,7 @@ import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.entity.Users;
 import com.ff.workspacemanagementsystem.exception.FloorsCountReachedException;
 import com.ff.workspacemanagementsystem.exception.NoFloorsMatchedException;
+import com.ff.workspacemanagementsystem.repository.BranchRepository;
 import com.ff.workspacemanagementsystem.repository.FloorsRepository;
 import com.ff.workspacemanagementsystem.repository.UsersRepository;
 import com.ff.workspacemanagementsystem.utility.UsersRole;
@@ -24,6 +25,9 @@ public class UsersDao {
 
 	@Autowired
 	private FloorsRepository floorsRepository;
+	
+	@Autowired
+	private BranchRepository branchRepository;
 
 	public Users save(Users user) {
 		return usersRepository.save(user);
@@ -76,7 +80,7 @@ public class UsersDao {
 		usersRepository.delete(user);
 	}
 
-	public Floors addFloorToClient(int a_id, int c_id, int b_id) {
+	public void addFloorToClient(int a_id, int c_id, int b_id) {
 		Users admin = findUserById(a_id);
 		Users client = findUserById(c_id);
 		Optional<Branch> opt_branch = branchRepository.findById(b_id);
