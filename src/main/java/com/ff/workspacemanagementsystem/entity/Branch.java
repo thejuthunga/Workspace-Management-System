@@ -32,25 +32,18 @@ public class Branch {
 	
 	@Schema(hidden = true)
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
-	private List<Floors> floors= new ArrayList<Floors>();
+	private List<Floors> floors=new ArrayList<Floors>();
 	
 	@Schema(hidden = true)
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
-	private List<Review> reviews =new ArrayList<Review>();
+	private List<Review> reviews=new ArrayList<Review>();
+
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private HeadOffice headOffice;
-	
-
-	public int getFloorsCount() {
-		return floorsCount;
-	}
-	public void setFloorsCount(int floorsCount) {
-		this.floorsCount = floorsCount;
-	}
 	
 	public HeadOffice getHeadOffice() {
 		return headOffice;
@@ -98,6 +91,12 @@ public class Branch {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
-	
+
+	public int getFloorsCount() {
+		return floorsCount;
+	}
+
+	public void setFloorsCount(int floorsCount) {
+		this.floorsCount = floorsCount;
+	}
 }

@@ -29,9 +29,9 @@ public class ReviewController {
 	//save Review
 	@Operation(description = "Add Review",summary = "add review")
 	@ApiResponse(description = "Review Added",responseCode = "201")
-	@PostMapping("branch_id/{b_id}")
-	public ResponseEntity<ResponseStructure<List<Review>>> saveReview(@PathVariable int b_id,@RequestBody Review review){
-		return reviewService.saveReview(b_id, review);
+	@PostMapping("client_id/{u_id}branch_id/{b_id}")
+	public ResponseEntity<ResponseStructure<List<Review>>> saveReview(@PathVariable int u_id,@PathVariable int b_id,@RequestBody Review review){
+		return reviewService.saveReview(u_id,b_id, review);
 	}
 	
 	//Get Review
