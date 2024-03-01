@@ -24,9 +24,9 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	//save Review
-	@PostMapping("branch_id/{b_id}")
-	public ResponseEntity<ResponseStructure<List<Review>>> saveReview(@PathVariable int b_id,@RequestBody Review review){
-		return reviewService.saveReview(b_id, review);
+	@PostMapping("client_id/{u_id}branch_id/{b_id}")
+	public ResponseEntity<ResponseStructure<List<Review>>> saveReview(@PathVariable int u_id,@PathVariable int b_id,@RequestBody Review review){
+		return reviewService.saveReview(u_id,b_id, review);
 	}
 	
 	//Get Review

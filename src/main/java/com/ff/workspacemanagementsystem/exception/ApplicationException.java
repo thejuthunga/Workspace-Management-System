@@ -22,7 +22,7 @@ public class ApplicationException extends ResponseEntityExceptionHandler {
 		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
 		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage(HttpStatus.NOT_FOUND.getReasonPhrase());
-		responseStructure.setData("Details is not found.");
+		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 

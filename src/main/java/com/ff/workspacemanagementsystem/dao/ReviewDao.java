@@ -8,9 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.entity.Review;
+import com.ff.workspacemanagementsystem.entity.Users;
 import com.ff.workspacemanagementsystem.exception.IdNotFoundException;
 import com.ff.workspacemanagementsystem.repository.BranchRepository;
 import com.ff.workspacemanagementsystem.repository.ReviewRepository;
+import com.ff.workspacemanagementsystem.repository.UsersRepository;
+import com.ff.workspacemanagementsystem.utility.UsersRole;
 
 @Repository
 public class ReviewDao {
@@ -18,23 +21,34 @@ public class ReviewDao {
 	private ReviewRepository reviewRepository;
 	@Autowired
 	private BranchRepository branchRepository;
+	@Autowired
+	private UsersRepository userRepository;
 
 	// save Review
-	public List<Review> saveReview(int id, Review review) {
-		Optional<Branch> opt = branchRepository.findById(id);
+	public List<Review> saveReview(int u_id, int id, Review review) {
+		Optional<Users> opt = userRepository.findById(u_id);
 		if (opt.isPresent()) {
-			Branch branch = opt.get();
-			List<Review> reviews = branch.getReviews();
-			reviews.add(review);
-			branch.setReviews(reviews);
-			review.setBranch(branch);
-			reviewRepository.save(review);
-			branchRepository.save(branch);
+			Users users = opt.get();
+			if (users.getUsersRole() == UsersRole.CLIENT) {
+				Optional<Branch> b_opt = branchRepository.findById(id);
+				if (b_opt.isPresent()) {
+					Branch branch = b_opt.get();
+					List<Review> reviews = branch.getReviews();
+					reviews.add(review);
+					branch.setReviews(reviews);
+					review.setBranch(branch);
+					reviewRepository.save(review);
+					branchRepository.save(branch);
 
-			return reviews;
-		} else {
-			throw new IdNotFoundException("ID: " + id + " Not Found");
+					return reviews;
+				} else {
+					throw new IdNotFoundException("ID: " + id + " Not Found");
+				}
+			}
+
 		}
+		throw new NullPointerException("ID: " + u_id + " is not client");
+
 	}
 
 	// get review
@@ -86,7 +100,7 @@ public class ReviewDao {
 					r.setRating(review.getRating());
 					r.setBranch(r.getBranch());
 					reviewRepository.save(r);
-					rev=r;
+					rev = r;
 				}
 			}
 			return rev;
