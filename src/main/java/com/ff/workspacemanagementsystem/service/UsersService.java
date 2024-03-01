@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.ff.workspacemanagementsystem.dao.UsersDao;
 import com.ff.workspacemanagementsystem.dto.ResponseStructure;
-import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.entity.Users;
 
 @Service

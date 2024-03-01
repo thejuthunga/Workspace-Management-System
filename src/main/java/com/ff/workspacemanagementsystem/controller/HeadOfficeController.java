@@ -27,33 +27,33 @@ public class HeadOfficeController {
 	private HeadOfficeService headOfficeService;
 
 	// Save Head Office
-	@Operation(description = "Add HeadOffice",summary = "add headoffice")
-	@ApiResponse(description = "HeadOffice Created",responseCode = "201")
+	@Operation(description = "storing headofice details to the DB", summary = "Adding headoffice info")
+	@ApiResponse(description = "HeadOffice Created", responseCode = "201")
 	@PostMapping("/headOffice")
 	public ResponseEntity<ResponseStructure<HeadOffice>> saveHeadOffice(@RequestBody HeadOffice headOffice) {
 		return headOfficeService.saveHeadOffice(headOffice);
 	}
 
 	// update Head Office
-	@Operation(description = "Update HeadOffice",summary = "update headoffice")
-	@ApiResponse(description = "OK",responseCode = "200")
+	@Operation(description = "update headoffice data", summary = "Update headoffice info")
+	@ApiResponse(description = "OK", responseCode = "200")
 	@PutMapping("/headOffice/{headOfficeId}")
 	public ResponseEntity<ResponseStructure<HeadOffice>> updateHeadOffice(@PathVariable int headOfficeId,
 			@RequestBody HeadOffice headOffice) {
 		return headOfficeService.updateHeadOffice(headOfficeId, headOffice);
 	}
 
-	// Find  Head Office
-	@Operation(description = "Find HeadOffice",summary = "find headoffice")
-	@ApiResponse(description = "Found",responseCode = "302")
+	// Find Head Office
+	@Operation(description = "find headoffice info based on headoffice id", summary = "find headoffice")
+	@ApiResponse(description = "Found", responseCode = "302")
 	@GetMapping("/headOffice/{headOfficeId}")
 	public ResponseEntity<ResponseStructure<HeadOffice>> findHeadOfficeById(@PathVariable int headOfficeId) {
 		return headOfficeService.findHeadOfficeById(headOfficeId);
 	}
 
 	// find all head office
-	@Operation(description = "Find All HeadOffice",summary = "find all head office")
-	@ApiResponse(description = "Found",responseCode = "302")
+	@Operation(description = "list of head office ", summary = "find all head office")
+	@ApiResponse(description = "Found", responseCode = "302")
 	@GetMapping("/headOffice")
 	public ResponseEntity<ResponseStructure<List<HeadOffice>>> findAllHeadOffice() {
 		return headOfficeService.findAllHeadOffice();
