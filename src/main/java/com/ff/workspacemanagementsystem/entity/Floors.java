@@ -2,7 +2,6 @@ package com.ff.workspacemanagementsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -81,16 +80,6 @@ public class Floors {
 		this.branch = branch;
 	}
 
-	/*
-	 * public boolean getCafeAvailable() { return isCafeAvailable; }
-	 * 
-	 * public void setCafeAvailable(boolean isCafeAvailable) { this.isCafeAvailable
-	 * = isCafeAvailable; }
-	 * 
-	 * public boolean isIsfloorAvailable() { return isfloorAvailable; }
-	 * 
-	 * public void setIsfloorAvailable(boolean isfloorAvailable) {
-	 * this.isfloorAvailable = isfloorAvailable; }
-	 */
+	
 
 }

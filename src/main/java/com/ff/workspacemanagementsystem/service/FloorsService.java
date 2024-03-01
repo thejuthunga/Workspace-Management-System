@@ -107,6 +107,8 @@ public class FloorsService {
 //				floors.setFloorid(floorid);
 //			}
 //		}
+		
+		
 		if(floors2!=null &&floors!=null) {
 			if(floors.getNoOfWorkstations()!=0) {
 				floors2.setNoOfWorkstations(floors.getNoOfWorkstations());
