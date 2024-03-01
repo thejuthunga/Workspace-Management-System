@@ -16,8 +16,8 @@ public class ReviewService {
 	private ReviewDao reviewDao;
 	
 	//save Review
-	public ResponseEntity<ResponseStructure<List<Review>>> saveReview(int b_id,Review review){
-		List<Review> reviews=reviewDao.saveReview(b_id,review);
+	public ResponseEntity<ResponseStructure<List<Review>>> saveReview(int u_id,int b_id,Review review){
+		List<Review> reviews=reviewDao.saveReview(u_id,b_id,review);
 		
 		ResponseStructure<List<Review>> responseStructure = new ResponseStructure<List<Review>>();
 		responseStructure.setStatusCode(HttpStatus.CREATED.value());
