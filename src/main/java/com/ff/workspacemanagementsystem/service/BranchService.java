@@ -36,9 +36,8 @@ public class BranchService {
 		responseStructure.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<ResponseStructure<Branch>>(responseStructure, HttpStatus.OK);
 	}
-
-	public ResponseEntity<ResponseStructure<Branch>> Updatebranch(int id, Branch branch) {
-		responseStructure.setData(branchDao.updateBranch(id, branch));
+	public ResponseEntity<ResponseStructure<Branch>> Updatebranch(int h_id,int id,Branch branch){
+		responseStructure.setData(branchDao.updateBranch(h_id,id,branch));
 		responseStructure.setMessage(HttpStatus.OK.getReasonPhrase());
 		responseStructure.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<ResponseStructure<Branch>>(responseStructure, HttpStatus.OK);

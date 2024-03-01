@@ -1,6 +1,6 @@
 package com.ff.workspacemanagementsystem.utility;
 
-public enum UserRole {
+public enum UsersRole {
 	
 	ADMIN,
 	CLIENT

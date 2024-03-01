@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,31 +25,25 @@ public class Branch {
 	private int branchId;
 	private long branchContact;
 	private int floorsCount;
-
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
 	@JoinColumn
 	private Address address;
 	
-	
+	@Schema(hidden = true)
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
-	private List<Floors> floors= new ArrayList<Floors>();
+	private List<Floors> floors=new ArrayList<Floors>();
 	
+	@Schema(hidden = true)
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branch")
-	private List<Review> reviews =new ArrayList<Review>();
+	private List<Review> reviews=new ArrayList<Review>();
+
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private HeadOffice headOffice;
-	
-
-	public int getFloorsCount() {
-		return floorsCount;
-	}
-	public void setFloorsCount(int floorsCount) {
-		this.floorsCount = floorsCount;
-	}
 	
 	public HeadOffice getHeadOffice() {
 		return headOffice;
@@ -96,6 +91,12 @@ public class Branch {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
-	
+
+	public int getFloorsCount() {
+		return floorsCount;
+	}
+
+	public void setFloorsCount(int floorsCount) {
+		this.floorsCount = floorsCount;
+	}
 }
