@@ -2,6 +2,8 @@ package com.ff.workspacemanagementsystem.entity;
 
 import com.ff.workspacemanagementsystem.utility.UsersRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Users {
@@ -10,13 +12,16 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_seq_gen")
 	@SequenceGenerator(name = "user_seq_gen", allocationSize = 10, initialValue = 1, sequenceName = "users_sequence")
 	private int userId;
+	@Size(min = 4, message = "Minimum 4 caharacters is allowed")
 	private String userName;
 
 	@Enumerated(EnumType.STRING)
 	private UsersRole userRole;
-	private String userEmail;
-	private int employeeCount;
 	
+	@Email(message = "Invalid email format")
+	private String userEmail;
+	@Size(min = 100, max = 200)
+	private int employeeCount;
 	
 	@OneToOne(mappedBy = "users", cascade = CascadeType.MERGE)
 	private Floors floors;
@@ -67,5 +72,11 @@ public class Users {
 
 	public void setFloors(Floors floors) {
 		this.floors = floors;
+	}
+
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", userName=" + userName + ", userRole=" + userRole + ", userEmail="
+				+ userEmail + ", employeeCount=" + employeeCount + ", floors=" + floors + "]";
 	}
 }

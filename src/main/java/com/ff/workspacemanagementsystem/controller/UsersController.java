@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ff.workspacemanagementsystem.dto.ResponseStructure;
-import com.ff.workspacemanagementsystem.entity.Floors;
 import com.ff.workspacemanagementsystem.entity.Users;
 import com.ff.workspacemanagementsystem.service.UsersService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -20,7 +21,7 @@ public class UsersController {
 	private UsersService usersService;
 
 	@PostMapping
-	public ResponseEntity<ResponseStructure<Users>> save(@RequestBody Users user) {
+	public ResponseEntity<ResponseStructure<Users>> save(@RequestBody @Valid Users user) {
 		return usersService.save(user);
 	}
 
@@ -40,7 +41,7 @@ public class UsersController {
 	}
 
 	@PutMapping("/user/{id}")
-	public ResponseEntity<ResponseStructure<Users>> update(@PathVariable int id, @RequestBody Users user) {
+	public ResponseEntity<ResponseStructure<Users>> update(@PathVariable int id, @RequestBody @Valid Users user) {
 		return usersService.update(id, user);
 	}
 
