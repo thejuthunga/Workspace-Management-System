@@ -103,4 +103,12 @@ public class Branch {
 	public void setFloorsCount(int floorsCount) {
 		this.floorsCount = floorsCount;
 	}
+
+	@Override
+	public String toString() {
+		return "Branch [branchId=" + branchId + ", branchContact=" + branchContact + ", floorsCount=" + floorsCount
+				+ ", address=" + address + ", floors=" + floors + ", reviews=" + reviews + ", headOffice=" + headOffice
+				+ "]";
+	}
+	
 }
