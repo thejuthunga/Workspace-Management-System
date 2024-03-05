@@ -13,8 +13,6 @@ public class FloorDao {
 	@Autowired
 	private FloorsRepository floorRepository;
 	
-	
-	
 	public Floors saveFloor(Floors floors) {
 		return floorRepository.save(floors);
 	}

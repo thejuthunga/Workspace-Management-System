@@ -16,8 +16,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
+@ToString
+@EqualsAndHashCode
 public class Branch {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY,generator = "branch_seq_gen")
