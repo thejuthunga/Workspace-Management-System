@@ -49,6 +49,13 @@ public class Review {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+	@Override
+	public String toString() {
+		return "Review [reviewid=" + reviewid + ", feedback=" + feedback + ", rating=" + rating + ", branch=" + branch
+				+ "]";
+	}
+	
+	
 	
 	
 }
