@@ -16,8 +16,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
+@ToString
+@EqualsAndHashCode
 public class Branch {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY,generator = "branch_seq_gen")
@@ -99,4 +103,12 @@ public class Branch {
 	public void setFloorsCount(int floorsCount) {
 		this.floorsCount = floorsCount;
 	}
+
+	@Override
+	public String toString() {
+		return "Branch [branchId=" + branchId + ", branchContact=" + branchContact + ", floorsCount=" + floorsCount
+				+ ", address=" + address + ", floors=" + floors + ", reviews=" + reviews + ", headOffice=" + headOffice
+				+ "]";
+	}
+	
 }

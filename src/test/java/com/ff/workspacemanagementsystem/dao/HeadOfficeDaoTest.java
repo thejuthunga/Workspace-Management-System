@@ -16,7 +16,9 @@ class HeadOfficeDaoTest {
 	@Autowired
 	HeadOfficeDao headOfficeDao;
 
+	
 	@Test
+	//save Head Office
 	public void testSave() {
 		HeadOffice headOffice = new HeadOffice();
 		headOffice.setOfficeName("INDIQUBE");
@@ -28,12 +30,14 @@ class HeadOfficeDaoTest {
 		assertEquals(headOffice, headOffice1);
 	}
 
+	//get all head office
 	@Test
 	public void testGetAllHeadOffice() {
 		List<HeadOffice> headOffice = headOfficeDao.findAllHeadOffice();
 		assertNotNull(headOffice.size());
 	}
 
+	//get head office by id
 	@Test
 	public void testFindById() {
 		HeadOffice headOffice1 = headOfficeDao.findHeadOfficeById(122);
@@ -44,6 +48,7 @@ class HeadOfficeDaoTest {
 		assertEquals("Anusha", headOffice1.getBranchHead());
 	}
 
+	//update head office
 	@Test
 	public void testUpdate() {
 		HeadOffice headOffice = new HeadOffice();

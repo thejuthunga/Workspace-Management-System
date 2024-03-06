@@ -1,8 +1,11 @@
 package com.ff.workspacemanagementsystem.entity;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,21 +14,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Floors {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "floor_seq_gen")
 	@SequenceGenerator(name = "floor_seq_gen", allocationSize = 3, initialValue = 400, sequenceName = "floor_sequence")
 	private int floorid;
+	
+	@Min(value = 3)
 	private int noOfCabins;
+	@Min(value = 50)
+	@Max(value = 200)
 	private int noOfWorkstations;
-
+	
+	@NotNull(message = "isCafeAvailable must not be null")
+	@Column(nullable = false)
 	private Boolean isCafeAvailable;
 
 	private boolean isfloorAvailable;
@@ -41,43 +51,23 @@ public class Floors {
 	@JoinColumn
 	private Branch branch;
 
-	public int getFloorid() {
-		return floorid;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Floors other = (Floors) obj;
+		return floorid == other.floorid && Objects.equals(isCafeAvailable, other.isCafeAvailable)
+				&& isfloorAvailable == other.isfloorAvailable && noOfCabins == other.noOfCabins
+				&& noOfWorkstations == other.noOfWorkstations;
 	}
 
-	public void setFloorid(int floorid) {
-		this.floorid = floorid;
+	@Override
+	public int hashCode() {
+		return Objects.hash(floorid, isCafeAvailable, isfloorAvailable, noOfCabins, noOfWorkstations);
 	}
 
-	public int getNoOfCabins() {
-		return noOfCabins;
-	}
-
-	public void setNoOfCabins(int noOfCabins) {
-		this.noOfCabins = noOfCabins;
-	}
-
-	public int getNoOfWorkstations() {
-		return noOfWorkstations;
-	}
-
-	public void setNoOfWorkstations(int noOfWorkstations) {
-		this.noOfWorkstations = noOfWorkstations;
-	}
-
-	public Users getUsers() {
-		return users;
-	}
-
-	public void setUsers(Users users) {
-		this.users = users;
-	}
-
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
 }

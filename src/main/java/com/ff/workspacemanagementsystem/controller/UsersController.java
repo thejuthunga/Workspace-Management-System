@@ -30,7 +30,7 @@ public class UsersController {
 	@Operation(description = "storing user details to the DB",summary = "Adding user info")
 	@ApiResponse(description = "Created",responseCode = "201")
 	@PostMapping
-	public ResponseEntity<ResponseStructure<Users>> save(@RequestBody Users user) {
+	public ResponseEntity<ResponseStructure<Users>> save( @RequestBody  Users user) {
 		return usersService.save(user);
 	}
 	
