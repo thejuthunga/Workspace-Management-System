@@ -17,7 +17,7 @@ public class AppConfiguration {
 	public OpenAPI usersMicroserviceOpenAPI() {
 
 		Server localhost = new Server();
-		localhost.setUrl("http://localhost:8080");
+		localhost.setUrl("http://localhost:8081");
 		localhost.setDescription("Development environment");
 
 		Contact contact = new Contact();
