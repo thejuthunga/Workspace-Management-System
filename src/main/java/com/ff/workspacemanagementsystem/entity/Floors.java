@@ -19,6 +19,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+
 @Entity
 @Data
 public class Floors {
@@ -68,13 +69,5 @@ public class Floors {
 	public int hashCode() {
 		return Objects.hash(floorid, isCafeAvailable, isfloorAvailable, noOfCabins, noOfWorkstations);
 	}
-
-	
-	
-	
-
-	
-
-	
 
 }

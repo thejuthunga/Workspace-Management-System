@@ -25,6 +25,7 @@ public class HeadOfficeDao {
 		if (receivedHeadOffice != null) {
 			headOffice.setOfficeId(receivedHeadOffice.getOfficeId());
 			headOffice.setBranches(receivedHeadOffice.getBranches());
+
 			return headOfficeRepository.save(headOffice);
 		} else {
 			return null;

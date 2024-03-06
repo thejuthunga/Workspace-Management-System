@@ -35,7 +35,14 @@ public class ApplicationException extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-
+	
+	@ExceptionHandler(ValidationException.class)
+	public ResponseEntity<ResponseStructure<String>> fieldValidation(ValidationException exception) {
+		responseStructure.setData(exception.getMessage());
+		responseStructure.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+		responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.BAD_REQUEST);
+	}
 	
 	
 	//floor exceed
