@@ -9,12 +9,16 @@ import org.junit.jupiter.api.Test;
 
 import com.ff.workspacemanagementsystem.entity.Branch;
 import com.ff.workspacemanagementsystem.repository.BranchRepository;
+import com.ff.workspacemanagementsystem.repository.HeadOfficeRepository;
 
 @SpringBootTest(classes = WorkspaceManagementSystemApplication.class)
 public class BranchTests {
 	
 	@Autowired
 	private BranchRepository branchRepository;
+	
+	@Autowired
+	private HeadOfficeRepository headOfficeRepository;
 	
 	@Test
 	public void saveBranch() {
@@ -52,7 +56,5 @@ public class BranchTests {
 		assertEquals(branch.toString(), branchRepository.save(branch).toString());
 		
 	}
-	
-	
 	
 }
