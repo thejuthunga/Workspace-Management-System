@@ -80,16 +80,4 @@ public class Floors {
 	public void setBranch(Branch branch) {
 		this.branch = branch;
 	}
-
-	/*
-	 * public boolean getCafeAvailable() { return isCafeAvailable; }
-	 * 
-	 * public void setCafeAvailable(boolean isCafeAvailable) { this.isCafeAvailable
-	 * = isCafeAvailable; }
-	 * 
-	 * public boolean isIsfloorAvailable() { return isfloorAvailable; }
-	 * 
-	 * public void setIsfloorAvailable(boolean isfloorAvailable) {
-	 * this.isfloorAvailable = isfloorAvailable; }
-	 */	
 }

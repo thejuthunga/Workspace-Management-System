@@ -1,7 +1,6 @@
 package com.ff.workspacemanagementsystem.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ class HeadOfficeDaoTest {
 
 	@Test
 	public void testGetAllHeadOffice() {
-	
 		List<HeadOffice> headOffice = headOfficeDao.findAllHeadOffice();
 		assertNotNull(headOffice.size());
 	}
